@@ -1,0 +1,95 @@
+<?xml version="1.0"?>
+
+
+<project name="TDD_Examples" default="dist" basedir=".">
+<property name="ProjectName"        value="TDD_Examples" />
+
+    <property name="build.dir"                       value="build"/>
+    <property name="testdata.dir"                    value="testdata"/>
+    <property name="dist.dir"                        value="dist"/>
+
+
+<!--  ===================================================================  -->
+<!--  Prepares the build and test data directory                           -->
+<!--  ===================================================================  -->
+   <target name="prepare">
+       <mkdir dir="${build.dir}"/>
+       <mkdir dir="${dist.dir}/lib"/>
+       <mkdir dir="${testdata.dir}"/>
+   </target>
+
+   <!--  ===================================================================  -->
+   <!--  Build Distribution for all tests for all chapters                    -->
+   <!--  ===================================================================  -->
+   <target name="run-all-tests" >
+      <!-- run ant on all dist targets in  build files for each of the chapters  -->
+      <ant inheritrefs="false" inheritall="false" antfile="Ch3-build.xml" target="dist"/>
+      <ant inheritrefs="false" inheritall="false" antfile="Ch4-build.xml" target="dist"/>
+      <ant inheritrefs="false" inheritall="false" antfile="Ch5-build.xml" target="dist"/>
+      <ant inheritrefs="false" inheritall="false" antfile="Ch6-build.xml" target="dist"/>
+   </target>
+
+
+   <!--  ===================================================================  -->
+   <!--  Build Distribution for all handsOn tests for all chapters            -->
+   <!--  ===================================================================  -->
+   <target name="run-all-tests_handsOn" >
+      <!-- run ant on all dist targets in  build files for each of the chapters  -->
+      <ant inheritrefs="false" inheritall="false" antfile="Ch3-build.xml" target="dist_handsOn"/>
+      <ant inheritrefs="false" inheritall="false" antfile="Ch4-build.xml" target="dist_handsOn"/>
+      <ant inheritrefs="false" inheritall="false" antfile="Ch5-build.xml" target="dist_handsOn"/>
+      <ant inheritrefs="false" inheritall="false" antfile="Ch6-build.xml" target="dist_handsOn"/>
+   </target>
+
+
+
+
+<!--  ===================================================================  -->
+<!--  The overall build task                                               -->
+<!--  ===================================================================  -->
+<target name="dist" depends="unit-test-report">
+</target>
+
+<!--  ===================================================================  -->
+<!--  The overall build task for the handsOn examples                      -->
+<!--  ===================================================================  -->
+<target name="dist_handsOn" depends="unit-test-report_handsOn">
+</target>
+
+<!--  ===================================================================  -->
+<!--  Cleans up generated stuff                                            -->
+<!--  ===================================================================  -->
+<target name="clean">
+    <delete dir="${build.dir}" quiet="true"/>
+    <delete dir="${dist.dir}" quiet="true"/>
+    <delete dir="${testdata.dir}" quiet="true"/>
+</target>
+
+
+
+   <!--  ===================================================================  -->
+   <!--  Generate report for unit tests                                       -->
+   <!--  ===================================================================  -->
+    <target name="unit-test-report" depends="run-all-tests">
+        <junitreport todir="${testdata.dir}">
+            <fileset dir="${testdata.dir}">
+                <include name="TEST-*.xml"/>
+            </fileset>
+            <report todir="${testdata.dir}"/>
+        </junitreport>
+    </target>
+
+   <!--  ===================================================================  -->
+   <!--  Generate report for handsOn unit tests                               -->
+   <!--  ===================================================================  -->
+    <target name="unit-test-report_handsOn" depends="run-all-tests_handsOn">
+        <junitreport todir="${testdata.dir}">
+            <fileset dir="${testdata.dir}">
+                <include name="TEST-*.xml"/>
+            </fileset>
+            <report todir="${testdata.dir}"/>
+        </junitreport>
+    </target>
+</project>
+
+

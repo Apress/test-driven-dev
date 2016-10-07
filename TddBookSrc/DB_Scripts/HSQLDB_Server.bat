@@ -1,0 +1,2 @@
+set CLASSPATH=%CLASSPATH%;C:\Java\Projects\TDDBook\TddBookSrc\dependencies\hsqldb.jar
+start "HSQLDB Server" /MIN java org.hsqldb.Server -database C:\Java\Projects\TDDBook\TddBookSrc\DB_Scripts/db/fbPool

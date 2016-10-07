@@ -1,0 +1,291 @@
+<?xml version="1.0"?>
+
+
+<project name="CH4_TDD_Examples" default="dist" basedir=".">
+    <property name="ProjectName" value="CH4_TDD_Examples"/>
+
+
+    <!-- change this property to use a compiler other than javac. -->
+    <property name="build.compiler" value="classic"/>
+
+
+    <property name="build.dir" value="build/Ch4"/>
+    <property name="build.dir_handsOn" value="build/Ch4_handsOn"/>
+    <property name="build-test-classes.dir" value="${build.dir}/test-classes"/>
+    <property name="build-classes.dir" value="${build.dir}/classes"/>
+    <property name="src.dir" value="Ch4\bookSource\src"/>
+    <property name="test.dir" value="Ch4\bookSource\test"/>
+    <property name="build-test-classes.dir_handsOn" value="${build.dir_handsOn}/test-classes"/>
+    <property name="build-classes.dir_handsOn" value="${build.dir_handsOn}/classes"/>
+    <property name="src.dir_handsOn" value="Ch4\handsOn\src"/>
+    <property name="test.dir_handsOn" value="Ch4\handsOn\test"/>
+    <property name="tdd-pkg-src.dir" value="com/apress/tddbook"/>
+    <property name="tdd.src.dir" value="${src.dir}/${tdd-pkg-src.dir}"/>
+    <property name="tdd.test.dir" value="${test.dir}/${tdd-pkg-src.dir}"/>
+    <property name="tdd.src.dir_handsOn" value="${src.dir_handsOn}/${tdd-pkg-src.dir}"/>
+    <property name="tdd.test.dir_handsOn" value="${test.dir_handsOn}/${tdd-pkg-src.dir}"/>
+    <property name="dist.dir" value="dist"/>
+    <property name="dependencies.dir" value="dependencies"/>
+    <property name="java.lib.dir" value="C:\j2sdk1.4.1_03\lib"/>
+    <property name="jarName" value="Ch4"/>
+    <property name="testJarName" value="Ch4Test"/>
+    <property name="jarName_handsOn" value="Ch4_handsOn"/>
+    <property name="testJarName_handsOn" value="Ch4Test_handsOn"/>
+    <property name="testdata.dir" value="testdata"/>
+    <property name="JSP.dir" value="/Ch4/bookSource/src/com/apress/tddbook/jsps"/>
+
+
+
+    <path id="src.compile.path">
+        <pathelement location="${dependencies.dir}/jasper-compiler.jar"/>
+        <pathelement location="${dependencies.dir}/servlet.jar"/>
+        <pathelement location="${dependencies.dir}/xmlParserAPIs.jar"/>
+        <pathelement location="${dependencies.dir}/junit.jar"/>
+        <pathelement location="${dependencies.dir}/httpunit.jar"/>
+        <pathelement location="${dependencies.dir}/jasper-runtime.jar"/>
+        <pathelement location="${dependencies.dir}/Tidy.jar"/>
+        <pathelement location="${dependencies.dir}/easymock.jar"/>
+        <pathelement location="${dependencies.dir}/js.jar"/>
+    </path>
+
+
+    <path id="test.compile.path">
+        <pathelement location="${dependencies.dir}/jasper-compiler.jar"/>
+        <pathelement location="${dependencies.dir}/servlet.jar"/>
+        <pathelement location="${dependencies.dir}/xmlParserAPIs.jar"/>
+        <pathelement location="${dependencies.dir}/junit.jar"/>
+        <pathelement location="${dependencies.dir}/httpunit.jar"/>
+        <pathelement location="${dependencies.dir}/jasper-runtime.jar"/>
+        <pathelement location="${dependencies.dir}/Tidy.jar"/>
+        <pathelement location="${dependencies.dir}/easymock.jar"/>
+        <pathelement location="${dependencies.dir}/js.jar"/>
+        <pathelement location="${build-classes.dir}"/>
+    </path>
+
+    <path id="test.compile.path_handsOn">
+        <pathelement location="${dependencies.dir}/jasper-compiler.jar"/>
+        <pathelement location="${dependencies.dir}/servlet.jar"/>
+        <pathelement location="${dependencies.dir}/xmlParserAPIs.jar"/>
+        <pathelement location="${dependencies.dir}/junit.jar"/>
+        <pathelement location="${dependencies.dir}/httpunit.jar"/>
+        <pathelement location="${dependencies.dir}/jasper-runtime.jar"/>
+        <pathelement location="${dependencies.dir}/Tidy.jar"/>
+        <pathelement location="${dependencies.dir}/easymock.jar"/>
+        <pathelement location="${dependencies.dir}/js.jar"/>
+        <pathelement location="${build-classes.dir_handsOn}"/>
+    </path>
+
+    <path id="test.run.path">
+        <pathelement location="${dependencies.dir}/jasper-compiler.jar"/>
+        <pathelement location="${dependencies.dir}/j2ee.jar"/>
+        <pathelement location="${dependencies.dir}/xmlParserAPIs.jar"/>
+        <pathelement location="${dependencies.dir}/jasper-runtime.jar"/>
+        <pathelement location="${dependencies.dir}/Tidy.jar"/>
+        <pathelement location="${dependencies.dir}/easymock.jar"/>
+        <pathelement location="${dependencies.dir}/js.jar"/>
+        <pathelement location="${dependencies.dir}/httpunit.jar"/>
+        <pathelement location="${java.lib.dir}/tools.jar"/>
+        <fileset dir="${dist.dir}/lib">
+            <include name="${jarName}.jar"/>
+            <include name="${testJarName}.jar"/>
+        </fileset>
+    </path>
+    <path id="test.handsOn.run.path">
+        <pathelement location="${dependencies.dir}/jasper-compiler.jar"/>
+        <pathelement location="${dependencies.dir}/j2ee.jar"/>
+        <pathelement location="${dependencies.dir}/xmlParserAPIs.jar"/>
+        <pathelement location="${dependencies.dir}/jasper-runtime.jar"/>
+        <pathelement location="${dependencies.dir}/Tidy.jar"/>
+        <pathelement location="${dependencies.dir}/easymock.jar"/>
+        <pathelement location="${dependencies.dir}/js.jar"/>
+        <pathelement location="${dependencies.dir}/httpunit.jar"/>
+        <pathelement location="${java.lib.dir}/tools.jar"/>
+        <fileset dir="${dist.dir}/lib">
+            <include name="${jarName_handsOn}.jar"/>
+            <include name="${testJarName_handsOn}.jar"/>
+        </fileset>
+    </path>
+
+    <!--  ===================================================================  -->
+    <!--  Prepares the build and dist directory                                -->
+    <!--  ===================================================================  -->
+    <target name="prepare">
+        <mkdir dir="${build-classes.dir}"/>
+        <mkdir dir="${build-test-classes.dir}"/>
+        <mkdir dir="${dist.dir}/lib"/>
+        <mkdir dir="${testdata.dir}"/>
+    </target>
+
+    <!--  ===================================================================  -->
+    <!--  Prepares the build and dist directory for the HandsOn code           -->
+    <!--  ===================================================================  -->
+    <target name="prepare_handsOn">
+        <mkdir dir="${build-classes.dir_handsOn}"/>
+        <mkdir dir="${build-test-classes.dir_handsOn}"/>
+        <mkdir dir="${dist.dir}/lib"/>
+        <mkdir dir="${testdata.dir}"/>
+    </target>
+
+    <!--  ===================================================================  -->
+    <!--  Compiles the source code                                             -->
+    <!--  ===================================================================  -->
+    <target name="compile" depends="prepare">
+        <javac srcdir="${tdd.src.dir}" destdir="${build-classes.dir}" debug="on"
+            deprecation="off" optimize="off" includes="**">
+            <classpath refid="src.compile.path"/>
+        </javac>
+    </target>
+
+
+    <!--  ===================================================================  -->
+    <!--  Compiles the source code for the HandsOn code                        -->
+    <!--  ===================================================================  -->
+    <target name="compile_handsOn" depends="prepare_handsOn">
+        <javac srcdir="${tdd.src.dir_handsOn}" destdir="${build-classes.dir_handsOn}" debug="on"
+            deprecation="off" optimize="off" includes="**">
+            <classpath refid="src.compile.path"/>
+        </javac>
+    </target>
+
+    <!--  ===================================================================  -->
+    <!--  Compiles the test code                                               -->
+    <!--  ===================================================================  -->
+    <target name="test-compile" depends="prepare, compile">
+        <javac srcdir="${tdd.test.dir}" destdir="${build-test-classes.dir}" debug="on"
+            deprecation="off" optimize="off" includes="**">
+            <classpath refid="test.compile.path"/>
+        </javac>
+    </target>
+
+
+    <!--  ===================================================================  -->
+    <!--  Compiles the test code for the HandsOn code                          -->
+    <!--  ===================================================================  -->
+    <target name="test-compile_handsOn" depends="prepare_handsOn">
+        <javac srcdir="${tdd.test.dir_handsOn}" destdir="${build-test-classes.dir_handsOn}" debug="on"
+            deprecation="off" optimize="off" includes="**">
+            <classpath refid="test.compile.path_handsOn"/>
+        </javac>
+    </target>
+
+    <!--  ===================================================================  -->
+    <!--  Builds the jar file                                                  -->
+    <!--  ===================================================================  -->
+    <target name="jar" depends="compile">
+        <jar jarfile="${dist.dir}/lib/${jarName}.jar" basedir="${build-classes.dir}"/>
+    </target>
+
+    <!--  ===================================================================  -->
+    <!--  Builds the jar file for the HandsOn code                             -->
+    <!--  ===================================================================  -->
+    <target name="jar_handsOn" depends="compile_handsOn">
+        <jar jarfile="${dist.dir}/lib/${jarName_handsOn}.jar" basedir="${build-classes.dir_handsOn}"/>
+    </target>
+
+    <!--  ===================================================================  -->
+    <!--  Builds the jar file for the test classes                             -->
+    <!--  ===================================================================  -->
+    <target name="jartest" depends="test-compile">
+        <jar jarfile="${dist.dir}/lib/${testJarName}.jar" basedir="${build-test-classes.dir}"/>
+    </target>
+
+    <!--  ===================================================================  -->
+    <!--  Builds the jar file for the test classes for the HandsOn code        -->
+    <!--  ===================================================================  -->
+    <target name="jartest_handsOn" depends="test-compile_handsOn">
+        <jar jarfile="${dist.dir}/lib/${testJarName_handsOn}.jar" basedir="${build-test-classes.dir_handsOn}"/>
+    </target>
+
+    <!--  ===================================================================  -->
+    <!--  The overall build task                                               -->
+    <!--  ===================================================================  -->
+    <target name="dist" depends="run-all-tests">
+    </target>
+
+    <!--  ===================================================================  -->
+    <!--  The overall build task for the HandsOn code                          -->
+    <!--  ===================================================================  -->
+    <target name="dist_handsOn" depends="run-all-tests_handsOn">
+    </target>
+
+    <!--  ===================================================================  -->
+    <!--  Cleans up generated stuff                                            -->
+    <!--  ===================================================================  -->
+    <target name="clean">
+        <delete dir="${build.dir}" quiet="true"/>
+        <delete file="${dist.dir}/lib/${jarName}.jar" quiet="true"/>
+        <delete file="${dist.dir}/lib/${testJarName}.jar" quiet="true"/>
+        <delete file="${dist.dir}/lib/${jarName_handsOn}.jar" quiet="true"/>
+        <delete file="${dist.dir}/lib/${testJarName_handsOn}.jar" quiet="true"/>
+    </target>
+
+
+    <!--  ===================================================================  -->
+    <!--  Runs all the unit tests for the system                               -->
+    <!--  ===================================================================  -->
+    <target name="run-all-tests" depends="jar, jartest">
+        <junit printsummary="yes">
+            <classpath refid="test.run.path"/>
+            <formatter type="xml"/>
+            <test name="com.apress.tddbook.Ch4TestSuite" todir="${testdata.dir}"/>
+        </junit>
+    </target>
+
+
+    <!--  ===================================================================  -->
+    <!--  Runs all the unit tests for the system for the HandsOn code          -->
+    <!--  ===================================================================  -->
+    <target name="run-all-tests_handsOn" depends="jar_handsOn, jartest_handsOn">
+        <junit printsummary="yes">
+            <classpath refid="test.handsOn.run.path"/>
+            <formatter type="xml"/>
+            <test name="com.apress.tddbook.Ch4TestSuite" todir="${testdata.dir}"/>
+        </junit>
+    </target>
+
+
+    <!--  ===================================================================  -->
+    <!--  Runs PlayerPickJSPTester                                             -->
+    <!--  ===================================================================  -->
+    <target name="run-playerpick-jsp-tests" depends="jar, jartest">
+        <junit printsummary="yes">
+            <classpath refid="test.run.path"/>
+            <formatter type="xml"/>
+            <test name="com.apress.tddbook.jsps.PlayerPickJSPTester" todir="${testdata.dir}"/>
+        </junit>
+    </target>
+    <!--  ===================================================================  -->
+    <!--  Runs PlayerPickServletTester                                         -->
+    <!--  ===================================================================  -->
+    <target name="run-playerpick-servlet-tests" depends="jar, jartest">
+        <junit printsummary="yes">
+            <classpath refid="test.run.path"/>
+            <formatter type="xml"/>
+            <test name="com.apress.tddbook.servlets.PlayerPickServletTester" todir="${testdata.dir}"/>
+        </junit>
+    </target>
+
+    <!--  ===================================================================  -->
+    <!--  Runs PostResultsTester                                               -->
+    <!--  ===================================================================  -->
+    <target name="run-postResults-tests" depends="jar_handsOn, jartest_handsOn">
+        <junit printsummary="yes">
+            <classpath refid="test.handsOn.run.path"/>
+            <formatter type="xml"/>
+            <test name="com.apress.tddbook.servlets.PlayersResultsServletTester" todir="${testdata.dir}"/>
+        </junit>
+    </target>
+    <!--  ===================================================================  -->
+    <!--  Generate report for unit tests                                       -->
+    <!--  ===================================================================  -->
+    <target name="unit-test-report" depends="run-all-tests, run-all-tests_handsOn">
+        <junitreport todir="${testdata.dir}">
+            <fileset dir="${testdata.dir}">
+                <include name="TEST-*.xml"/>
+            </fileset>
+            <report todir="${testdata.dir}"/>
+        </junitreport>
+    </target>
+</project>
+
+

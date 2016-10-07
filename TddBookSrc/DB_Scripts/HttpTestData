@@ -1,0 +1,242 @@
+DROP INDEX SYS_PK_POOL
+DELETE FROM POOL
+DROP TABLE POOL
+CREATE TABLE POOL(POOL_ID INTEGER,DATE DATE,WINNER VARCHAR,STATUS VARCHAR, CONSTRAINT SYS_PK_POOL PRIMARY KEY (POOL_ID) )
+INSERT INTO POOL VALUES(?,?,?,?)
+	column=POOL_ID datatype=INTEGER value='1'
+	column=DATE datatype=DATE value='2004-09-11'
+	column=WINNER datatype=VARCHAR value=''
+	column=STATUS datatype=VARCHAR value='Closed'
+
+	column=POOL_ID datatype=INTEGER value='2'
+	column=DATE datatype=DATE value='2004-09-18'
+	column=WINNER datatype=VARCHAR value=''
+	column=STATUS datatype=VARCHAR value='Open'
+
+	column=POOL_ID datatype=INTEGER value='3'
+	column=DATE datatype=DATE value='2004-09-25'
+	column=WINNER datatype=VARCHAR value=''
+	column=STATUS datatype=VARCHAR value='Created'
+
+	Number of Rows=3
+
+DELETE FROM GAME
+DROP TABLE GAME
+CREATE TABLE GAME(POOL_ID INTEGER,GAME_NUM INTEGER,HOME_TEAM VARCHAR,AWAY_TEAM VARCHAR)
+INSERT INTO GAME VALUES(?,?,?,?)
+	column=POOL_ID datatype=INTEGER value='1'
+	column=GAME_NUM datatype=INTEGER value='1'
+	column=HOME_TEAM datatype=VARCHAR value='Green Bay'
+	column=AWAY_TEAM datatype=VARCHAR value='Kansas City'
+
+	column=POOL_ID datatype=INTEGER value='1'
+	column=GAME_NUM datatype=INTEGER value='2'
+	column=HOME_TEAM datatype=VARCHAR value='Tennessee'
+	column=AWAY_TEAM datatype=VARCHAR value='Houston'
+
+	column=POOL_ID datatype=INTEGER value='1'
+	column=GAME_NUM datatype=INTEGER value='3'
+	column=HOME_TEAM datatype=VARCHAR value='Indianapolis'
+	column=AWAY_TEAM datatype=VARCHAR value='Carolina'
+
+	column=POOL_ID datatype=INTEGER value='1'
+	column=GAME_NUM datatype=INTEGER value='4'
+	column=HOME_TEAM datatype=VARCHAR value='New England'
+	column=AWAY_TEAM datatype=VARCHAR value='NY Giants'
+
+	column=POOL_ID datatype=INTEGER value='1'
+	column=GAME_NUM datatype=INTEGER value='5'
+	column=HOME_TEAM datatype=VARCHAR value='New Orleans'
+	column=AWAY_TEAM datatype=VARCHAR value='Chicago'
+
+	column=POOL_ID datatype=INTEGER value='1'
+	column=GAME_NUM datatype=INTEGER value='6'
+	column=HOME_TEAM datatype=VARCHAR value='Cleveland'
+	column=AWAY_TEAM datatype=VARCHAR value='Oakland'
+
+	column=POOL_ID datatype=INTEGER value='1'
+	column=GAME_NUM datatype=INTEGER value='7'
+	column=HOME_TEAM datatype=VARCHAR value='Dallas'
+	column=AWAY_TEAM datatype=VARCHAR value='Philadelphia'
+
+	column=POOL_ID datatype=INTEGER value='1'
+	column=GAME_NUM datatype=INTEGER value='8'
+	column=HOME_TEAM datatype=VARCHAR value='Washington'
+	column=AWAY_TEAM datatype=VARCHAR value='Tampa Bay'
+
+	column=POOL_ID datatype=INTEGER value='1'
+	column=GAME_NUM datatype=INTEGER value='9'
+	column=HOME_TEAM datatype=VARCHAR value='Jacksonville'
+	column=AWAY_TEAM datatype=VARCHAR value='Miami'
+
+	column=POOL_ID datatype=INTEGER value='1'
+	column=GAME_NUM datatype=INTEGER value='10'
+	column=HOME_TEAM datatype=VARCHAR value='Denver'
+	column=AWAY_TEAM datatype=VARCHAR value='Pittsburgh'
+
+	column=POOL_ID datatype=INTEGER value='1'
+	column=GAME_NUM datatype=INTEGER value='11'
+	column=HOME_TEAM datatype=VARCHAR value='NY Jets'
+	column=AWAY_TEAM datatype=VARCHAR value='Buffalo'
+
+	column=POOL_ID datatype=INTEGER value='1'
+	column=GAME_NUM datatype=INTEGER value='12'
+	column=HOME_TEAM datatype=VARCHAR value='Arizona'
+	column=AWAY_TEAM datatype=VARCHAR value='Baltimore'
+
+	column=POOL_ID datatype=INTEGER value='1'
+	column=GAME_NUM datatype=INTEGER value='13'
+	column=HOME_TEAM datatype=VARCHAR value='Seattle'
+	column=AWAY_TEAM datatype=VARCHAR value='San Francisco'
+
+	column=POOL_ID datatype=INTEGER value='1'
+	column=GAME_NUM datatype=INTEGER value='14'
+	column=HOME_TEAM datatype=VARCHAR value='St. Louis'
+	column=AWAY_TEAM datatype=VARCHAR value='Atlanta'
+
+	column=POOL_ID datatype=INTEGER value='2'
+	column=GAME_NUM datatype=INTEGER value='2'
+	column=HOME_TEAM datatype=VARCHAR value='Green Bay'
+	column=AWAY_TEAM datatype=VARCHAR value='Philadelphia'
+
+	column=POOL_ID datatype=INTEGER value='2'
+	column=GAME_NUM datatype=INTEGER value='1'
+	column=HOME_TEAM datatype=VARCHAR value='Tennessee'
+	column=AWAY_TEAM datatype=VARCHAR value='Tampa Bay'
+
+	column=POOL_ID datatype=INTEGER value='2'
+	column=GAME_NUM datatype=INTEGER value='3'
+	column=HOME_TEAM datatype=VARCHAR value='New England'
+	column=AWAY_TEAM datatype=VARCHAR value='Oakland'
+
+	column=POOL_ID datatype=INTEGER value='2'
+	column=GAME_NUM datatype=INTEGER value='4'
+	column=HOME_TEAM datatype=VARCHAR value='Indianapolis'
+	column=AWAY_TEAM datatype=VARCHAR value='Chicago'
+
+	column=POOL_ID datatype=INTEGER value='2'
+	column=GAME_NUM datatype=INTEGER value='5'
+	column=HOME_TEAM datatype=VARCHAR value='Cleveland'
+	column=AWAY_TEAM datatype=VARCHAR value='NY Giants'
+
+	column=POOL_ID datatype=INTEGER value='2'
+	column=GAME_NUM datatype=INTEGER value='6'
+	column=HOME_TEAM datatype=VARCHAR value='New Orleans'
+	column=AWAY_TEAM datatype=VARCHAR value='Carolina'
+
+	column=POOL_ID datatype=INTEGER value='2'
+	column=GAME_NUM datatype=INTEGER value='7'
+	column=HOME_TEAM datatype=VARCHAR value='Washington'
+	column=AWAY_TEAM datatype=VARCHAR value='Houston'
+
+	column=POOL_ID datatype=INTEGER value='2'
+	column=GAME_NUM datatype=INTEGER value='8'
+	column=HOME_TEAM datatype=VARCHAR value='Dallas'
+	column=AWAY_TEAM datatype=VARCHAR value='Kansas City'
+
+	column=POOL_ID datatype=INTEGER value='2'
+	column=GAME_NUM datatype=INTEGER value='9'
+	column=HOME_TEAM datatype=VARCHAR value='Denver'
+	column=AWAY_TEAM datatype=VARCHAR value='Atlanta'
+
+	column=POOL_ID datatype=INTEGER value='2'
+	column=GAME_NUM datatype=INTEGER value='10'
+	column=HOME_TEAM datatype=VARCHAR value='Jacksonville'
+	column=AWAY_TEAM datatype=VARCHAR value='San Francisco'
+
+	column=POOL_ID datatype=INTEGER value='2'
+	column=GAME_NUM datatype=INTEGER value='12'
+	column=HOME_TEAM datatype=VARCHAR value='NY Jets'
+	column=AWAY_TEAM datatype=VARCHAR value='Buffalo'
+
+	column=POOL_ID datatype=INTEGER value='2'
+	column=GAME_NUM datatype=INTEGER value='11'
+	column=HOME_TEAM datatype=VARCHAR value='Arizona'
+	column=AWAY_TEAM datatype=VARCHAR value='Baltimore'
+
+	column=POOL_ID datatype=INTEGER value='2'
+	column=GAME_NUM datatype=INTEGER value='13'
+	column=HOME_TEAM datatype=VARCHAR value='St. Louis'
+	column=AWAY_TEAM datatype=VARCHAR value='Pittsburgh'
+
+	column=POOL_ID datatype=INTEGER value='2'
+	column=GAME_NUM datatype=INTEGER value='14'
+	column=HOME_TEAM datatype=VARCHAR value='Seattle'
+	column=AWAY_TEAM datatype=VARCHAR value='Miami'
+
+	column=POOL_ID datatype=INTEGER value='3'
+	column=GAME_NUM datatype=INTEGER value='1'
+	column=HOME_TEAM datatype=VARCHAR value='St. Louis'
+	column=AWAY_TEAM datatype=VARCHAR value='Baltimore'
+
+	column=POOL_ID datatype=INTEGER value='3'
+	column=GAME_NUM datatype=INTEGER value='2'
+	column=HOME_TEAM datatype=VARCHAR value='Seattle'
+	column=AWAY_TEAM datatype=VARCHAR value='San Francisco'
+
+	column=POOL_ID datatype=INTEGER value='3'
+	column=GAME_NUM datatype=INTEGER value='3'
+	column=HOME_TEAM datatype=VARCHAR value='Arizona'
+	column=AWAY_TEAM datatype=VARCHAR value='Atlanta'
+
+	column=POOL_ID datatype=INTEGER value='3'
+	column=GAME_NUM datatype=INTEGER value='4'
+	column=HOME_TEAM datatype=VARCHAR value='NY Jets'
+	column=AWAY_TEAM datatype=VARCHAR value='Kansas City'
+
+	column=POOL_ID datatype=INTEGER value='3'
+	column=GAME_NUM datatype=INTEGER value='5'
+	column=HOME_TEAM datatype=VARCHAR value='Denver'
+	column=AWAY_TEAM datatype=VARCHAR value='Houston'
+
+	column=POOL_ID datatype=INTEGER value='3'
+	column=GAME_NUM datatype=INTEGER value='6'
+	column=HOME_TEAM datatype=VARCHAR value='Jacksonville'
+	column=AWAY_TEAM datatype=VARCHAR value='Carolina'
+
+	column=POOL_ID datatype=INTEGER value='3'
+	column=GAME_NUM datatype=INTEGER value='7'
+	column=HOME_TEAM datatype=VARCHAR value='Washington'
+	column=AWAY_TEAM datatype=VARCHAR value='NY Giants'
+
+	column=POOL_ID datatype=INTEGER value='3'
+	column=GAME_NUM datatype=INTEGER value='8'
+	column=HOME_TEAM datatype=VARCHAR value='Dallas'
+	column=AWAY_TEAM datatype=VARCHAR value='Chicago'
+
+	column=POOL_ID datatype=INTEGER value='3'
+	column=GAME_NUM datatype=INTEGER value='9'
+	column=HOME_TEAM datatype=VARCHAR value='Cleveland'
+	column=AWAY_TEAM datatype=VARCHAR value='Oakland'
+
+	column=POOL_ID datatype=INTEGER value='3'
+	column=GAME_NUM datatype=INTEGER value='10'
+	column=HOME_TEAM datatype=VARCHAR value='New Orleans'
+	column=AWAY_TEAM datatype=VARCHAR value='Philadelphia'
+
+	column=POOL_ID datatype=INTEGER value='3'
+	column=GAME_NUM datatype=INTEGER value='11'
+	column=HOME_TEAM datatype=VARCHAR value='New England'
+	column=AWAY_TEAM datatype=VARCHAR value='Tampa Bay'
+
+	column=POOL_ID datatype=INTEGER value='3'
+	column=GAME_NUM datatype=INTEGER value='12'
+	column=HOME_TEAM datatype=VARCHAR value='Indianapolis'
+	column=AWAY_TEAM datatype=VARCHAR value='Miami'
+
+	column=POOL_ID datatype=INTEGER value='3'
+	column=GAME_NUM datatype=INTEGER value='13'
+	column=HOME_TEAM datatype=VARCHAR value='Tennessee'
+	column=AWAY_TEAM datatype=VARCHAR value='Pittsburgh'
+
+	column=POOL_ID datatype=INTEGER value='3'
+	column=GAME_NUM datatype=INTEGER value='14'
+	column=HOME_TEAM datatype=VARCHAR value='Green Bay'
+	column=AWAY_TEAM datatype=VARCHAR value='Buffalo'
+
+	Number of Rows=42
+
+DELETE FROM PICKS
+DROP TABLE PICKS
+CREATE TABLE PICKS(POOL_ID INTEGER,USER_NAME VARCHAR,GAME_NUM INTEGER,PICKED_TEAM VARCHAR)
+CREATE UNIQUE INDEX SYS_PK_POOL ON POOL(POOL_ID)

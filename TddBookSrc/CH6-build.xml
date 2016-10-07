@@ -1,0 +1,495 @@
+<?xml version="1.0"?>
+
+
+<project name="CH6_TDD_Examples" default="dist" basedir=".">
+    <property name="ProjectName" value="CH6_TDD_Examples"/>
+
+
+    <property name="build.dir" value="build/Ch6"/>
+    <property name="build.dir_handsOn" value="build/Ch6_handsOn"/>
+    <property name="build-test-classes.dir" value="${build.dir}/test-classes"/>
+    <property name="build-classes.dir" value="${build.dir}/classes"/>
+    <property name="src.dir" value="Ch6\bookSource\src"/>
+    <property name="test.dir" value="Ch6\bookSource\test"/>
+    <property name="build-test-classes.dir_handsOn" value="${build.dir_handsOn}/test-classes"/>
+    <property name="build-classes.dir_handsOn" value="${build.dir_handsOn}/classes"/>
+    <property name="src.dir_handsOn" value="Ch6\handsOn\src"/>
+    <property name="test.dir_handsOn" value="Ch6\handsOn\test"/>
+    <property name="tdd-pkg-src.dir" value="com/apress/tddbook"/>
+    <property name="tdd.src.dir" value="${src.dir}/${tdd-pkg-src.dir}"/>
+    <property name="tdd.test.dir" value="${test.dir}/${tdd-pkg-src.dir}"/>
+    <property name="tdd.src.dir_handsOn" value="${src.dir_handsOn}/${tdd-pkg-src.dir}"/>
+    <property name="tdd.test.dir_handsOn" value="${test.dir_handsOn}/${tdd-pkg-src.dir}"/>
+    <property name="dist.dir" value="dist"/>
+    <property name="dependencies.dir" value="dependencies"/>
+    <property name="dbFile.dir" value="DB_Scripts"/>
+    <property name="java.lib.dir" value="C:\j2sdk1.4.1_03\lib"/>
+    <property name="jarName" value="Ch6"/>
+    <property name="testJarName" value="Ch6Test"/>
+    <property name="jarName_handsOn" value="Ch6_handsOn"/>
+    <property name="testJarName_handsOn" value="Ch6Test_handsOn"/>
+    <property name="pkg-ejb-src.dir" value="com/apress/tddbook/ejb"/>
+    <property name="ejb.src.dir" value="${src.dir}/${pkg-ejb-src.dir}"/>
+    <property name="descriptor.dir" value="${ejb.src.dir}/META_INF"/>
+    <property name="jboss-deploy.dir" value="C:\Java\Projects\JBoss\jboss-3.2.3\server\default\deploy"/>
+    <property name="jboss-clientjar.dir" value="C:\Java\Projects\JBoss\jboss-3.2.3\client"/>
+    <property name="war.dir" value="${build.dir}/${ProjectName}"/>
+    <property name="war.name" value="FootBallPool"/>
+    <property name="cfg.dir" value="${src.dir}/com/apress/tddbook/jsps"/>
+    <property name="image.dir" value="${src.dir}/${tdd-pkg-src.dir}/images"/>
+    <property name="tomcat.dir" value="C:\jakarta-tomcat-4.1.30"/>
+    <property name="web-inf.dir" value="${war.dir}/WEB-INF"/>
+    <property name="servlet-build-classes.dir" value="${web-inf.dir}/classes"/>
+    <property name="cfg.dir_handsOn" value="${src.dir_handsOn}/com/apress/tddbook/jsps"/>
+    <property name="war.dir_handsOn" value="${build.dir_handsOn}/${ProjectName}"/>
+    <property name="web-inf.dir_handsOn" value="${war.dir_handsOn}/WEB-INF"/>
+    <property name="servlet-build-classes.dir_handsOn" value="${web-inf.dir_handsOn}/classes"/>
+    <property name="testdata.dir" value="testdata"/>
+
+
+    <path id="src.compile.path">
+        <fileset dir="${dependencies.dir}">
+            <include name="**/*.jar"/>
+            <include name="**/*.zip"/>
+        </fileset>
+    </path>
+
+    <path id="test.compile.path">
+        <fileset dir="${dependencies.dir}">
+            <include name="**/*.jar"/>
+            <include name="**/*.zip"/>
+        </fileset>
+        <pathelement location="${build-classes.dir}"/>
+        <pathelement location="${build-classes.dir_handsOn}"/>
+    </path>
+    <path id="test.handsOn.compile.path">
+        <fileset dir="${dependencies.dir}">
+            <include name="**/*.jar"/>
+            <include name="**/*.zip"/>
+        </fileset>
+        <pathelement location="${build-classes.dir_handsOn}"/>
+    </path>
+
+    <!--  ===================================================================  -->
+    <!--  Prepares the build and dist directory                                -->
+    <!--  ===================================================================  -->
+    <target name="prepare">
+        <mkdir dir="${build-classes.dir}"/>
+        <mkdir dir="${build-test-classes.dir}"/>
+        <mkdir dir="${dist.dir}/lib"/>
+        <mkdir dir="${testdata.dir}"/>
+    </target>
+
+    <!--  ===================================================================  -->
+    <!--  Prepares the build and dist directory for the HandsOn code           -->
+    <!--  ===================================================================  -->
+    <target name="prepare_handsOn">
+        <mkdir dir="${build-classes.dir_handsOn}"/>
+        <mkdir dir="${build-test-classes.dir_handsOn}"/>
+        <mkdir dir="${dist.dir}/lib"/>
+        <mkdir dir="${testdata.dir}"/>
+    </target>
+
+    <!--  ===================================================================  -->
+    <!--  Compiles the source code                                             -->
+    <!--  ===================================================================  -->
+    <target name="compile" depends="prepare">
+        <javac srcdir="${tdd.src.dir}" destdir="${build-classes.dir}" debug="on"
+            deprecation="off" optimize="off" includes="**">
+            <classpath refid="src.compile.path"/>
+        </javac>
+    </target>
+
+
+    <!--  ===================================================================  -->
+    <!--  Compiles the source code for the HandsOn code                        -->
+    <!--  ===================================================================  -->
+    <target name="compile_handsOn" depends="prepare_handsOn">
+        <javac srcdir="${tdd.src.dir_handsOn}" destdir="${build-classes.dir_handsOn}" debug="on"
+            deprecation="off" optimize="off" includes="**">
+            <classpath refid="src.compile.path"/>
+        </javac>
+    </target>
+
+    <!--  ===================================================================  -->
+    <!--  Compiles the test code                                               -->
+    <!--  ===================================================================  -->
+    <target name="test-compile" depends="prepare">
+        <javac srcdir="${tdd.test.dir}" destdir="${build-test-classes.dir}" debug="on"
+            deprecation="off" optimize="off" includes="**">
+            <classpath refid="test.compile.path"/>
+        </javac>
+    </target>
+
+
+    <!--  ===================================================================  -->
+    <!--  Compiles the test code for the HandsOn code                          -->
+    <!--  ===================================================================  -->
+    <target name="test-compile_handsOn" depends="prepare_handsOn">
+        <javac srcdir="${tdd.test.dir_handsOn}" destdir="${build-test-classes.dir_handsOn}" debug="on"
+            deprecation="off" optimize="off" includes="**">
+            <classpath refid="test.handsOn.compile.path"/>
+        </javac>
+    </target>
+
+    <!--  ===================================================================  -->
+    <!--  Builds the jar file                                                  -->
+    <!--  ===================================================================  -->
+    <target name="jar" depends="compile">
+        <jar jarfile="${dist.dir}/lib/${jarName}.jar" basedir="${build-classes.dir}"/>
+    </target>
+
+    <!--  ===================================================================  -->
+    <!--  Builds the jar file for the HandsOn code                             -->
+    <!--  ===================================================================  -->
+    <target name="jar_handsOn" depends="compile_handsOn">
+        <jar jarfile="${dist.dir}/lib/${jarName_handsOn}.jar" basedir="${build-classes.dir_handsOn}"/>
+    </target>
+
+    <!--  ===================================================================  -->
+    <!--  Builds the jar file for the test classes                             -->
+    <!--  ===================================================================  -->
+    <target name="jartest" depends="test-compile">
+        <jar jarfile="${dist.dir}/lib/${testJarName}.jar" basedir="${build-test-classes.dir}"/>
+    </target>
+
+    <!--  ===================================================================  -->
+    <!--  Builds the jar file for the test classes for the HandsOn code        -->
+    <!--  ===================================================================  -->
+    <target name="jartest_handsOn" depends="test-compile_handsOn">
+        <jar jarfile="${dist.dir}/lib/${testJarName_handsOn}.jar" basedir="${build-test-classes.dir_handsOn}"/>
+    </target>
+
+    <!--  ===================================================================  -->
+    <!--  The overall build task                                               -->
+    <!--  ===================================================================  -->
+    <target name="dist" depends="jar, jartest, deployEjbToJBoss, deployToTomcat">
+    </target>
+
+
+    <!--  ===================================================================  -->
+    <!--  The overall build task                                               -->
+    <!--  ===================================================================  -->
+    <target name="dist_handsOn" depends="jar_handsOn, jartest_handsOn, deployEjbToJBoss, deployToTomcat_handsOn">
+    </target>
+
+    <!--  ===================================================================  -->
+    <!--  Cleans up generated stuff                                            -->
+    <!--  ===================================================================  -->
+    <target name="clean">
+        <delete dir="${build.dir}" quiet="true"/>
+        <delete file="${dist.dir}/lib/${jarName}.jar" quiet="true"/>
+        <delete file="${dist.dir}/lib/${testJarName}.jar" quiet="true"/>
+        <delete file="${dist.dir}/lib/${jarName_handsOn}.jar" quiet="true"/>
+        <delete file="${dist.dir}/lib/${testJarName_handsOn}.jar" quiet="true"/>
+    </target>
+
+    <!--  ===================================================================  -->
+    <!--  Create the EJB jar                                                   -->
+    <!--  ===================================================================  -->
+    <target name="ejbJar" depends="compile">
+        <ejbjar srcdir="${build-classes.dir}"
+            descriptordir="${descriptor.dir}"
+            destdir="${dist.dir}/lib"
+            genericjarsuffix="-fbpool.jar"
+            dependency="full"/>
+    </target>
+
+    <!-- ======================================================= -->
+    <!--Copies various files to the build directory needed to create the war file    -->
+    <!-- ======================================================= -->
+    <target name="prepare_war" depends="compile, test-compile">
+        <copy todir="${war.dir}">
+            <fileset dir="${cfg.dir}">
+                <include name="**/*.jsp"/>
+                <include name="**/*.html"/>
+            </fileset>
+        </copy>
+        <copy todir="${war.dir}/images">
+            <fileset dir="${image.dir}">
+                <include name="**/*.gif"/>
+            </fileset>
+        </copy>
+        <copy todir="${servlet-build-classes.dir}">
+            <fileset dir="${build-classes.dir}">
+                <include name="**/*.class"/>
+            </fileset>
+                    <fileset dir="${build-test-classes.dir}">
+                <include name="**/*.class"/>
+            </fileset>
+        </copy>
+        <copy file="${cfg.dir}/WEB-INF/web_ch6.xml" toFile="${web-inf.dir}/web.xml"/>
+        <copy file="${dependencies.dir}/hsqldb.jar" toDir="${web-inf.dir}/lib"/>
+        <copy file="${dependencies.dir}/dbunit-2.0.jar" toDir="${web-inf.dir}/lib"/>
+        <copy file="${dependencies.dir}/httpunit.jar" toDir="${web-inf.dir}/lib"/>
+        <jar jarfile="${dist.dir}/lib/${war.name}.war" basedir="${war.dir}"/>
+    </target>
+
+    <!-- ======================================================= -->
+    <!--Copies various files to the build directory needed to create the handsOn war file    -->
+    <!-- ======================================================= -->
+    <target name="prepare_war_handsOn" depends="compile_handsOn, test-compile_handsOn">
+        <copy todir="${war.dir_handsOn}">
+            <fileset dir="${cfg.dir_handsOn}">
+                <include name="**/*.jsp"/>
+                <include name="**/*.html"/>
+            </fileset>
+        </copy>
+        <copy todir="${war.dir_handsOn}/images">
+            <fileset dir="${image.dir}">
+                <include name="**/*.gif"/>
+            </fileset>
+        </copy>
+        <copy todir="${servlet-build-classes.dir_handsOn}">
+            <fileset dir="${build-classes.dir_handsOn}">
+                <include name="**/*.class"/>
+            </fileset>
+                    <fileset dir="${build-test-classes.dir_handsOn}">
+                <include name="**/*.class"/>
+            </fileset>
+        </copy>
+        <copy file="${cfg.dir_handsOn}/WEB-INF/web_ch6.xml" toFile="${web-inf.dir_handsOn}/web.xml"/>
+        <copy file="${dependencies.dir}/hsqldb.jar" toDir="${web-inf.dir_handsOn}/lib"/>
+        <copy file="${dependencies.dir}/dbunit-2.0.jar" toDir="${web-inf.dir_handsOn}/lib"/>
+        <copy file="${dependencies.dir}/httpunit.jar" toDir="${web-inf.dir_handsOn}/lib"/>
+        <jar jarfile="${dist.dir}/lib/${war.name}.war" basedir="${war.dir_handsOn}"/>
+    </target>
+    <!--  ===================================================================  -->
+    <!--  Deploy war to local Tomcat folder                                    -->
+    <!--  ===================================================================  -->
+    <target name="deployToTomcat" depends="prepare_war">
+        <!-- clean up existing Tomcat deployed application -->
+        <delete file="${tomcat.dir}/webapps/${war.name}.war" quiet="true"/>
+        <delete dir="${tomcat.dir}/webapps/${war.name}" quiet="true"/>
+        <!-- copy in freshly built application -->
+        <copy file="${dist.dir}/lib/${war.name}.war" todir="${tomcat.dir}/webapps"/>
+    </target>
+
+
+    <!--  ===================================================================  -->
+    <!--  Deploy handsOn war to local Tomcat folder                            -->
+    <!--  ===================================================================  -->
+    <target name="deployToTomcat_handsOn" depends="prepare_war_handsOn">
+        <!-- clean up existing Tomcat deployed application -->
+        <delete file="${tomcat.dir}/webapps/${war.name}.war" quiet="true"/>
+        <delete dir="${tomcat.dir}/webapps/${war.name}" quiet="true"/>
+        <!-- copy in freshly built application -->
+        <copy file="${dist.dir}/lib/${war.name}.war" todir="${tomcat.dir}/webapps"/>
+    </target>
+    <!--  ===================================================================  -->
+    <!--  Deploy to local JBoss folder                                         -->
+    <!--  ===================================================================  -->
+    <target name="deployEjbToJBoss" depends="ejbJar">
+        <!-- copy in freshly built application -->
+        <copy file="${dist.dir}/lib/ejb-fbpool.jar" todir="${jboss-deploy.dir}"/>
+    </target>
+
+
+    <!--  ===================================================================  -->
+    <!--  Runs the PoolDB tests                                                -->
+    <!--  ===================================================================  -->
+    <target name="run-poolDB-tests" depends="jar, jartest">
+        <junit printsummary="yes">
+            <classpath>
+               <fileset dir="${dependencies.dir}">
+                   <include name="**/*.jar"/>
+               </fileset>
+               <fileset dir="${dist.dir}/lib">
+                   <include name="${jarName}.jar"/>
+                   <include name="${testJarName}.jar"/>
+               </fileset>
+            </classpath>
+            <sysproperty key="DBDataFileDir" value="${dbFile.dir}"/>
+            <formatter type="xml"/>
+            <test name="com.apress.tddbook.PoolDatabaseDBTester" todir="${testdata.dir}"/>
+        </junit>
+    </target>
+
+    <!--  ===================================================================  -->
+    <!--  Runs the PoolDB tests                                                -->
+    <!--  ===================================================================  -->
+    <target name="run-poolDB-tests_handsOn" depends="jar_handsOn, jartest_handsOn">
+        <junit printsummary="yes">
+            <classpath>
+               <fileset dir="${dependencies.dir}">
+                   <include name="**/*.jar"/>
+               </fileset>
+               <fileset dir="${dist.dir}/lib">
+                   <include name="${jarName_handsOn}.jar"/>
+                   <include name="${testJarName_handsOn}.jar"/>
+               </fileset>
+            </classpath>
+            <sysproperty key="DBDataFileDir" value="${dbFile.dir}"/>
+            <formatter type="xml"/>
+            <test name="com.apress.tddbook.PoolDatabaseDBTester" todir="${testdata.dir}"/>
+        </junit>
+    </target>
+    <!--  ===================================================================  -->
+    <!--  Runs the EJB Stub tests                                              -->
+    <!--  ===================================================================  -->
+    <target name="run-ejbstub-tests" depends="jar, jartest">
+        <junit printsummary="yes">
+            <classpath>
+               <fileset dir="${dependencies.dir}">
+                   <include name="**/*.jar"/>
+               </fileset>
+               <fileset dir="${dist.dir}/lib">
+                   <include name="${jarName}.jar"/>
+                   <include name="${testJarName}.jar"/>
+               </fileset>
+            </classpath>
+            <sysproperty key="EJBTestType" value="Stub"/>
+            <sysproperty key="DBDataFileDir" value="${dbFile.dir}"/>
+            <sysproperty key="DBLocation" value="jdbc:hsqldb:hsql://localhost"/>
+            <formatter type="xml"/>
+            <test name="com.apress.tddbook.ejb.FBPoolServerTest" todir="${testdata.dir}"/>
+        </junit>
+    </target>
+
+    <!--  ===================================================================  -->
+    <!--  Runs the EJB tests against a real server                             -->
+    <!--  ===================================================================  -->
+    <target name="run-ejb-tests" >
+        <junit printsummary="yes">
+            <classpath>
+               <fileset dir="${dependencies.dir}">
+                   <include name="**/*.jar"/>
+               </fileset>
+               <fileset dir="${dist.dir}/lib">
+                   <include name="${jarName}.jar"/>
+                   <include name="${testJarName}.jar"/>
+               </fileset>
+              <pathelement location="${jboss-clientjar.dir}/jbossall-client.jar"/>
+            </classpath>
+            <sysproperty key="EJBTestType" value="RealServer"/>
+            <sysproperty key="DBDataFileDir" value="${dbFile.dir}"/>
+            <sysproperty key="DBLocation" value="jdbc:hsqldb:hsql://localhost:1701"/>
+            <formatter type="xml"/>
+            <test name="com.apress.tddbook.ejb.FBPoolServerTest" todir="${testdata.dir}"/>
+        </junit>
+    </target>
+
+    <!--  ===================================================================  -->
+    <!--  Run PlayerPickServlet Integration tests using Cactus                 -->
+    <!--  ===================================================================  -->
+    <target name="runPlayerPickTests" depends="deployToTomcat">
+        <taskdef resource="cactus.tasks">
+            <classpath>
+                <pathelement location="${dependencies.dir}/cactus-1.6.1.jar"/>
+                <pathelement location="${dependencies.dir}/cactus-ant-1.6.1.jar"/>
+                <pathelement location="${dependencies.dir}/commons-httpclient-2.0.jar"/>
+                <pathelement location="${dependencies.dir}/commons-logging-1.0.3.jar"/>
+                <pathelement location="${dependencies.dir}/aspectjrt-1.1.1.jar"/>
+            </classpath>
+        </taskdef>
+        <cactifywar srcfile="${dist.dir}/lib/${war.name}.war" destfile="${dist.dir}/lib/${war.name}-cf.war">
+        </cactifywar>
+
+        <cactus warfile="${dist.dir}/lib/${war.name}-cf.war"
+            printsummary="yes" failureproperty="tests.failed">
+            <classpath>
+                <path refid="test.compile.path"/>
+                <pathelement location="${build-classes.dir}"/>
+                <fileset dir="${dist.dir}/lib">
+                   <include name="${jarName}.jar"/>
+                   <include name="${testJarName}.jar"/>
+               </fileset>
+            </classpath>
+            <sysproperty key="DBDataFileDir" value="${dbFile.dir}"/>
+            <containerset>
+                <tomcat4x dir="${tomcat.dir}" port="8080"
+                    todir="${testdata.dir}"/>
+            </containerset>
+            <formatter type="xml"/>
+            <batchtest>
+                <fileset dir="${test.dir}">
+                    <include name="**/PlayerPickIntTest*.java"/>
+                </fileset>
+            </batchtest>
+        </cactus>
+
+    </target>
+
+    <!--  ===================================================================  -->
+    <!--  Run HandsOn PlayerPickServlet Integration tests using Cactus         -->
+    <!--  ===================================================================  -->
+    <target name="runPlayerPickTests_handsOn" depends="deployToTomcat_handsOn">
+        <taskdef resource="cactus.tasks">
+            <classpath>
+                <pathelement location="${dependencies.dir}/cactus-1.6.1.jar"/>
+                <pathelement location="${dependencies.dir}/cactus-ant-1.6.1.jar"/>
+                <pathelement location="${dependencies.dir}/commons-httpclient-2.0.jar"/>
+                <pathelement location="${dependencies.dir}/commons-logging-1.0.3.jar"/>
+                <pathelement location="${dependencies.dir}/aspectjrt-1.1.1.jar"/>
+            </classpath>
+        </taskdef>
+        <cactifywar srcfile="${dist.dir}/lib/${war.name}.war" destfile="${dist.dir}/lib/${war.name}-cf.war">
+        </cactifywar>
+
+        <cactus warfile="${dist.dir}/lib/${war.name}-cf.war"
+            printsummary="yes" failureproperty="tests.failed">
+            <classpath>
+                <path refid="test.handsOn.compile.path"/>
+                <fileset dir="${dist.dir}/lib">
+                   <include name="${jarName_handsOn}.jar"/>
+                   <include name="${testJarName_handsOn}.jar"/>
+               </fileset>
+            </classpath>
+            <sysproperty key="DBDataFileDir" value="${dbFile.dir}"/>
+            <containerset>
+                <tomcat4x dir="${tomcat.dir}" port="8080"
+                    todir="${testdata.dir}"/>
+            </containerset>
+            <formatter type="xml"/>
+            <batchtest>
+                <fileset dir="${test.dir}">
+                    <include name="**/PlayerPickIntTest*.java"/>
+                </fileset>
+            </batchtest>
+        </cactus>
+
+    </target>
+
+    <!--  ===================================================================  -->
+    <!--  Runs the HttpUnit tests                                                -->
+    <!--  ===================================================================  -->
+    <target name="run-homePageServlet-tests" >
+        <junit printsummary="yes">
+            <classpath>
+               <fileset dir="${dependencies.dir}">
+                   <include name="**/*.jar"/>
+               </fileset>
+               <fileset dir="${dist.dir}/lib">
+                   <include name="${jarName}.jar"/>
+                   <include name="${testJarName}.jar"/>
+               </fileset>
+            </classpath>
+            <sysproperty key="DBDataFileDir" value="${dbFile.dir}"/>
+            <formatter type="xml"/>
+            <test name="com.apress.tddbook.HomePageTest" todir="${testdata.dir}"/>
+        </junit>
+    </target>
+
+    <!--  ===================================================================  -->
+    <!--  Runs the AdminGuI tests                                              -->
+    <!--  ===================================================================  -->
+    <target name="run-admin-gui-tests" >
+        <junit printsummary="yes">
+            <classpath>
+               <fileset dir="${dependencies.dir}">
+                   <include name="**/*.jar"/>
+               </fileset>
+               <fileset dir="${dist.dir}/lib">
+                   <include name="${jarName}.jar"/>
+                   <include name="${testJarName}.jar"/>
+               </fileset>
+            </classpath>
+            <sysproperty key="DBDataFileDir" value="${dbFile.dir}"/>
+            <formatter type="xml"/>
+            <test name="com.apress.tddbook.gui.AdminGUITester" todir="${testdata.dir}"/>
+        </junit>
+    </target>
+
+</project>
+
+
